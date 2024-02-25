@@ -3,8 +3,12 @@ include 'functions.php';
 
 if (isset($_GET['id'])) {
     $post = getPostById($_GET['id']);
+    if (!$post) {
+        echo "Post not found.";
+        exit;
+    }
 } else {
-    header('Location: index.php');
+    echo "Post ID not provided.";
     exit;
 }
 ?>
@@ -24,6 +28,7 @@ if (isset($_GET['id'])) {
             <p class="text-gray-600"><?php echo $post['content']; ?></p>
             <div class="mt-8">
                 <a href="index.php" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Back to Posts</a>
+                <a href="admin/edit_post.php?id=<?php echo $post['id']; ?>" class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded ml-4">Edit Post</a>
             </div>
         </div>
     </div>
